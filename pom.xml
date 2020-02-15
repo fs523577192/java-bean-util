@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>tech.firas.framework</groupId>
+    <artifactId>java-bean-util</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <name>Firas Framework Java Bean Util</name>
+    <description>Some utilities for setting fields of aaAa Java bean</description>
+    <url>https://github.com/fs523577192/java-bean-util</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/fs523577192/java-bean-util</connection>
+        <developerConnection>scm:git:git://github.com/fs523577192/java-bean-util</developerConnection>
+        <url>https://github.com/fs523577192/java-bean-util</url>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/fs523577192/java-bean-util/issues</url>
+    </issueManagement>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>spring303</id>
+            <properties>
+                <spring.version>3.0.3.RELEASE</spring.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spring322</id>
+            <properties>
+                <spring.version>3.2.2.RELEASE</spring.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spring329</id>
+            <properties>
+                <spring.version>3.2.9.RELEASE</spring.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spring509</id>
+            <properties>
+                <spring.version>5.0.9.RELEASE</spring.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spring520</id>
+            <properties>
+                <spring.version>5.2.0.RELEASE</spring.version>
+            </properties>
+        </profile>
+    </profiles>
+</project>
