@@ -27,6 +27,17 @@ public class FieldGetter<T> extends FieldAccessor {
 
     private final Method getMethod;
 
+    /**
+     * Construct a FieldGetter to get a field in `srcClass`
+     *
+     * The `field` may be declared in a base class of `srcClass`
+     *
+     * @param srcClass  the type of the Java bean whose field is to be read
+     * @param field  the field to be read
+     * @param configuration  specifies how to get the field value
+     * @throws NoSuchMethodException  if the configuration does not allow directly access to the field but
+     *                                 there is no public getter of the field
+     */
     public FieldGetter(final Class<? super T> srcClass, final Field field, final Configuration configuration)
             throws NoSuchMethodException {
         super(field);
@@ -55,6 +66,10 @@ public class FieldGetter<T> extends FieldAccessor {
         field.setAccessible(true);
     }
 
+    /**
+     *
+     * @return  the type of the value got from this getter
+     */
     public Class<?> getReturnType() {
         if (this.getMethod == null) {
             return this.field.getType();
@@ -62,6 +77,13 @@ public class FieldGetter<T> extends FieldAccessor {
         return this.getMethod.getReturnType();
     }
 
+    /**
+     * Get the field value of the Java bean `obj`
+     * @param obj  the Java bean to set
+     * @return  the value of the field
+     * @throws InvocationTargetException  if it fails to set the value of the field in `obj`
+     * @throws IllegalAccessException  if it fails to access the field / its getter
+     */
     public Object get(final T obj) throws IllegalAccessException, InvocationTargetException {
         if (this.getMethod == null) {
             return field.get(obj);

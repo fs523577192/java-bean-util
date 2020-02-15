@@ -35,6 +35,13 @@ public class ByFieldNameBeanConverter<S, D> implements Converter<S, D> {
     private final Constructor<D> constructor;
     private final Map<FieldGetter<S>, FieldSetter<D>> map;
 
+    /**
+     * Construct a ByFieldNameBeanConverter
+     * @param srcClass  the type of the source Java bean to convert from
+     * @param destClass  the type of the target Java bean to convert to
+     * @param configuration  specifies how to get / set the fields of the Java bean
+     * @throws NoSuchMethodException  if the target Java bean has no accessible default constructor
+     */
     public ByFieldNameBeanConverter(final Class<S> srcClass, final Class<D> destClass,
             final Configuration configuration) throws NoSuchMethodException {
         final Configuration conf = configuration == null ? new Configuration() : configuration;
@@ -46,8 +53,6 @@ public class ByFieldNameBeanConverter<S, D> implements Converter<S, D> {
             throw new NoSuchMethodException("There is no accessible default constructor (no parameter) for " +
                     destClass.getName());
         }
-
-        // this.tryBestConvert = conf.tryBestConvert;
 
         this.map = new HashMap<>();
         for (Class<?> clazz = srcClass; !Object.class.equals(clazz) && clazz != null; clazz = clazz.getSuperclass()) {

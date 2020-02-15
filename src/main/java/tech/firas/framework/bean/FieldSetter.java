@@ -26,6 +26,17 @@ public class FieldSetter<E> extends FieldAccessor {
 
     private final Method setMethod;
 
+    /**
+     * Construct a FieldSetter to get a field in `destClass`
+     *
+     * The `field` may be declared in a base class of `destClass`
+     *
+     * @param destClass  the type of the Java bean whose field is to be written
+     * @param field  the field to be written
+     * @param configuration  specifies how to set the field value
+     * @throws NoSuchMethodException  if the configuration does not allow directly access to the field but
+     *                                 there is no public setter of the field
+     */
     public FieldSetter(final Class<? super E> destClass, final Field field, final Configuration configuration)
             throws NoSuchMethodException {
         super(field);
@@ -54,6 +65,10 @@ public class FieldSetter<E> extends FieldAccessor {
         field.setAccessible(true);
     }
 
+    /**
+     *
+     * @return  the type of the field value that this setter accepts
+     */
     public Class<?> getParameterType() {
         if (this.setMethod == null) {
             return this.field.getType();
@@ -61,6 +76,13 @@ public class FieldSetter<E> extends FieldAccessor {
         return this.setMethod.getParameterTypes()[0];
     }
 
+    /**
+     * Set the field value of the Java bean `obj` to `value`
+     * @param obj  the Java bean to set
+     * @param value  the value of the field
+     * @throws InvocationTargetException  if it fails to set the value of the field in `obj`
+     * @throws IllegalAccessException  if it fails to access the field / its setter
+     */
     public void set(E obj, Object value) throws InvocationTargetException, IllegalAccessException {
         if (this.setMethod == null) {
             this.field.set(obj, value);
